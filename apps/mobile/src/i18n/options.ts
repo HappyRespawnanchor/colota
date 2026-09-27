@@ -5,8 +5,9 @@
 
 import en from "./locales/en.json"
 import es from "./locales/es.json"
+import zh from "./locales/zh.json"
 
-export const SUPPORTED_LANGUAGES = ["en", "es"] as const
+export const SUPPORTED_LANGUAGES = ["en", "es", "zh"] as const
 export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number]
 
 type CatalogKey = keyof typeof en
@@ -18,7 +19,7 @@ export type TranslationKey = CatalogKey | PluralBase<CatalogKey>
 export const FALLBACK_LANGUAGE: SupportedLanguage = "en"
 
 /** Each language in its own words, so a reader finds theirs whatever the app is set to. */
-export const LANGUAGE_NAMES: Record<SupportedLanguage, string> = { en: "English", es: "Español" }
+export const LANGUAGE_NAMES: Record<SupportedLanguage, string> = { en: "English", es: "Español", zh: "简体中文" }
 
 /** The device tag carries a region, the catalogs do not. */
 export function resolveLanguage(tag: string | undefined): SupportedLanguage {
@@ -31,7 +32,8 @@ export const I18N_OPTIONS = {
   fallbackLng: FALLBACK_LANGUAGE,
   resources: { 
     en: { translation: en }, 
-    es: { translation: es } 
+    es: { translation: es },
+    zh: { translation: zh }
   },
   interpolation: { escapeValue: false },
   returnNull: false,
