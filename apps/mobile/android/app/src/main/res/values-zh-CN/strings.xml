@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name" translatable="false">Colota</string>
+    <string name="shortcut_start_short">开始</string>
+    <string name="shortcut_start_long">开始跟踪</string>
+    <string name="shortcut_stop_short">停止</string>
+    <string name="shortcut_stop_long">停止跟踪</string>
+
+    <string name="channel_tracking">位置跟踪</string>
+    <string name="channel_tracking_description">显示活跃的跟踪状态和同步队列</string>
+    <string name="channel_stopped">跟踪已停止</string>
+    <string name="channel_stopped_description">跟踪未按您的要求停止时发出提醒</string>
+    <string name="channel_auto_export">自动导出</string>
+    <string name="channel_auto_export_description">自动导出数据的通知</string>
+    <string name="channel_backup">备份 &amp; 恢复</string>
+    <string name="channel_backup_description">备份或恢复进行期间显示</string>
+    <string name="channel_battery_recovery">电量恢复</string>
+    <string name="channel_battery_recovery_description">电量过低导致停止后恢复跟踪</string>
+
+    <string name="status_location_off">位置服务已关闭</string>
+    <string name="status_paused">已暂停</string>
+    <string name="status_searching">正在搜索 GPS</string>
+    <string name="status_tracking">跟踪中</string>
+    <string name="status_not_recording">未记录</string>
+    <string name="status_stationary">静止</string>
+    <string name="status_pause_wifi">区域 WiFi · 离开后恢复</string>
+    <string name="status_pause_motionless">没有移动 · 移动后恢复</string>
+    <string name="status_pause_zone">位于区域内 · 离开后恢复</string>
+    <string name="status_offline">离线模式</string>
+    <string name="status_all_sent">已全部发送</string>
+    <plurals name="status_queued">
+        <item quantity="one">队列中有 %d 项</item>
+        <item quantity="other">队列中有 %d 项</item>
+    </plurals>
+    <string name="status_last_sync">上次同步 %s</string>
+    <string name="sync_just_now">刚刚</string>
+    <plurals name="sync_minutes_ago">
+        <item quantity="one">%d 分钟前</item>
+        <item quantity="other">%d 分钟前</item>
+    </plurals>
+    <plurals name="sync_hours_ago">
+        <item quantity="one">%d 小时前</item>
+        <item quantity="other">%d 小时前</item>
+    </plurals>
+    <plurals name="sync_days_ago">
+        <item quantity="one">%d 天前</item>
+        <item quantity="other">%d 天前</item>
+    </plurals>
+
+    <string name="stopped_title">跟踪已停止</string>
+    <string name="stop_reason_battery" formatted="false">电量低于 5% · 充电后恢复</string>
+    <string name="stop_reason_location_off">位置服务已关闭 · 点击立即恢复，或在重新开启后 10 分钟内自动恢复</string>
+    <string name="stop_reason_permission">缺少位置权限</string>
+    <string name="stop_reason_provider">位置提供程序错误</string>
+    <string name="stop_reason_killed">跟踪服务被终止 - 点击恢复</string>
+    <string name="stop_reason_shortcut">通过快捷方式停止</string>
+    <string name="stop_reason_automation">通过自动化 intent 停止</string>
+    <string name="stop_reason_other">已停止</string>
+
+    <string name="toast_tracking_started">Colota 已开始跟踪</string>
+    <string name="toast_tracking_stopped">Colota 已停止跟踪</string>
+
+    <string name="auto_export_title">自动导出</string>
+    <string name="auto_export_running">正在导出位置数据...</string>
+    <string name="auto_export_nothing_new">没有要导出的新位置。</string>
+    <string name="auto_export_complete">自动导出完成</string>
+    <plurals name="auto_export_done">
+        <item quantity="one">已将 %1$d 个位置导出到 %2$s</item>
+        <item quantity="other">已将 %1$d 个位置导出到 %2$s</item>
+    </plurals>
+    <string name="auto_export_failed">自动导出失败</string>
+    <string name="auto_export_permission_lost">目录权限已丢失。请重新选择导出目录。</string>
+    <string name="auto_export_invalid_config">导出配置无效：%s</string>
+    <string name="auto_export_directory_failed">无法访问导出目录：%s</string>
+    <string name="auto_export_read_failed">无法读取位置。将重试。</string>
+    <string name="auto_export_save_failed">无法保存导出文件。将重试。</string>
+    <string name="auto_export_gave_up">多次尝试后导出仍失败。请检查设置。</string>
+
+    <string name="backup_title">Colota 备份</string>
+    <string name="backup_working">处理中...</string>
+    <string name="backup_encrypting">正在加密备份...</string>
+    <string name="backup_restoring">正在恢复备份...</string>
+
+    <string name="battery_recovery_title">正在恢复跟踪</string>
+    <string name="battery_recovery_text">充电器已连接 - 正在重新启动位置跟踪</string>
+</resources>
