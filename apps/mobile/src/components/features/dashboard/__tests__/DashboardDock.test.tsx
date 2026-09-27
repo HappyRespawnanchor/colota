@@ -57,7 +57,7 @@ const idleProps = {
   coords: null,
   lastKnown: null,
   stoppedByBattery: false,
-  intervalText: "Every 30 s · Balanced",
+  interval: { label: "Records every 30 s", caption: "Syncs every 5 min" },
   endpoint: "https://tracks.example.org/api",
   isOfflineMode: false,
   navigation: { navigate: jest.fn() },
@@ -97,7 +97,7 @@ describe("DashboardDock", () => {
       expect(divider.props.inset).toBe(true)
     }
     expect(idle.getByLabelText("Ready, No fixes yet")).toBeTruthy()
-    expect(idle.getByLabelText("Interval, Every 30 s · Balanced")).toBeTruthy()
+    expect(idle.getByLabelText("Records every 30 s, Syncs every 5 min")).toBeTruthy()
     idle.unmount()
 
     const live = renderDock(trackingProps)

@@ -260,17 +260,32 @@ describe("DashboardScreen", () => {
     expect(getByTestId("DashboardDock").props.endpoint).toBe(DEFAULT_SETTINGS.endpoint)
   })
 
+  it("says offline mode in place of the sync cadence, because nothing is sent while it is on", async () => {
+    mockSettings = { ...DEFAULT_SETTINGS, isOfflineMode: true }
+
+    const { getByTestId } = renderScreen()
+    await settle()
+
+    expect(getByTestId("DashboardDock").props.interval.caption).toBe("Offline mode")
+  })
+
   it("labels the interval row with the fix and sync cadence from settings while no profile is active", async () => {
     mockSettings = { ...DEFAULT_SETTINGS, interval: 30, syncInterval: 300 }
     const batched = renderScreen()
     await settle()
-    expect(batched.getByTestId("DashboardDock").props.intervalText).toBe("Every 30 s · Sync 5 min")
+    expect(batched.getByTestId("DashboardDock").props.interval).toEqual({
+      label: "Records every 30 s",
+      caption: "Syncs every 5 min"
+    })
     batched.unmount()
 
     mockSettings = { ...DEFAULT_SETTINGS, interval: 5, syncInterval: 0 }
     const instant = renderScreen()
     await settle()
-    expect(instant.getByTestId("DashboardDock").props.intervalText).toBe("Every 5 s · Instant sync")
+    expect(instant.getByTestId("DashboardDock").props.interval).toEqual({
+      label: "Records every 5 s",
+      caption: "Syncs each fix"
+    })
     expect(mockGetProfiles).not.toHaveBeenCalled()
   })
 
@@ -285,7 +300,12 @@ describe("DashboardScreen", () => {
     ])
 
     const { getByTestId } = renderScreen()
-    await waitFor(() => expect(getByTestId("DashboardDock").props.intervalText).toBe("Every 5 min · Sync 15 min"))
+    await waitFor(() =>
+      expect(getByTestId("DashboardDock").props.interval).toEqual({
+        label: "Records every 5 min",
+        caption: "Syncs every 15 min"
+      })
+    )
   })
 
   it("falls back to the settings pair when the active profile id matches no saved profile", async () => {
@@ -297,7 +317,10 @@ describe("DashboardScreen", () => {
     const { getByTestId } = renderScreen()
     await waitFor(() => expect(mockGetProfiles).toHaveBeenCalled())
 
-    expect(getByTestId("DashboardDock").props.intervalText).toBe("Every 30 s · Sync 5 min")
+    expect(getByTestId("DashboardDock").props.interval).toEqual({
+      label: "Records every 30 s",
+      caption: "Syncs every 5 min"
+    })
   })
 
   it("starts tracking directly when location services are enabled", async () => {

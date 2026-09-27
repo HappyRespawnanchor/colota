@@ -8,16 +8,14 @@ import { ScrollView } from "react-native"
 import { CircleAlert, CircleDashed, CircleDot, CirclePause, Timer, type LucideIcon } from "lucide-react-native"
 import { useTheme } from "../../../hooks/useTheme"
 import { Settings, ThemeColors } from "../../../types/global"
-import { describeState, type StateIcon, type StateTone } from "../../../utils/dashboardState"
+import { describeState, type IntervalLines, type StateIcon, type StateTone } from "../../../utils/dashboardState"
 import { size } from "../../../constants"
 import { MapDock } from "../../ui/MapDock"
 import { Divider } from "../../ui/Divider"
 import { SpinningLoader } from "../../ui/SpinningLoader"
-import { StatRow } from "../../ui/StatRow"
 import { ConnectionStatus } from "./ConnectionStatus"
 import { StateLine } from "../../ui/StateLine"
 import { WelcomeCard } from "./WelcomeCard"
-import { useTranslation } from "../../../i18n/useTranslation"
 
 type DashboardDockProps = {
   tracking: boolean
@@ -29,7 +27,7 @@ type DashboardDockProps = {
   coords: { accuracy: number; timestamp: number } | null
   lastKnown: { timestamp: number } | null
   stoppedByBattery: boolean
-  intervalText: string
+  interval: IntervalLines
   endpoint: string | null
   isOfflineMode: boolean
   navigation: any
@@ -61,7 +59,7 @@ export function DashboardDock({
   coords,
   lastKnown,
   stoppedByBattery,
-  intervalText,
+  interval,
   endpoint,
   isOfflineMode,
   navigation,
@@ -76,7 +74,6 @@ export function DashboardDock({
   onNavigateToRequestFormat
 }: DashboardDockProps) {
   const { colors } = useTheme()
-  const { t } = useTranslation()
 
   if (firstRun) {
     return (
@@ -119,7 +116,13 @@ export function DashboardDock({
     <MapDock maxHeight={maxHeight}>
       <StateLine icon={icon} iconColor={iconColor} label={state.label} caption={state.caption} testID="dock-state" />
       <Divider tight inset />
-      <StatRow icon={Timer} label={t("dashboard.interval")} value={intervalText} testID="dock-interval" />
+      <StateLine
+        icon={Timer}
+        iconColor={colors.textSecondary}
+        label={interval.label}
+        caption={interval.caption}
+        testID="dock-interval"
+      />
       {!isOfflineMode && (
         <>
           <Divider tight inset />

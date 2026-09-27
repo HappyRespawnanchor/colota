@@ -152,12 +152,19 @@ export function trackingSummary(
   return isOfflineMode ? recording : `${recording} · ${syncSummary(syncIntervalSeconds)}`
 }
 
-export function intervalText(intervalSeconds: number, syncIntervalSeconds: number): string {
-  const sync =
-    syncIntervalSeconds === 0
+export type IntervalLines = { label: string; caption: string }
+
+export function intervalLines(
+  intervalSeconds: number,
+  syncIntervalSeconds: number,
+  isOfflineMode: boolean
+): IntervalLines {
+  const caption = isOfflineMode
+    ? t("dashboard.offlineMode")
+    : syncIntervalSeconds === 0
       ? t("tracking.interval.instantSync")
       : t("tracking.interval.sync", { duration: formatDuration(syncIntervalSeconds) })
-  return `${formatInterval(intervalSeconds)} · ${sync}`
+  return { label: formatInterval(intervalSeconds), caption }
 }
 
 export function formatLastFix(timestampSeconds: number | null, now: Date = new Date()): string {
