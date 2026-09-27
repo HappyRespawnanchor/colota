@@ -3,7 +3,7 @@ import {
   formatDuration,
   formatInterval,
   formatLastFix,
-  intervalText,
+  intervalLines,
   pickBannerCondition,
   recordingPhrase,
   recordingSummary,
@@ -199,38 +199,42 @@ describe("describeState", () => {
 
 describe("formatInterval", () => {
   it("keeps sub-minute intervals in seconds", () => {
-    expect(formatInterval(5)).toBe("Every 5 s")
-    expect(formatInterval(30)).toBe("Every 30 s")
+    expect(formatInterval(5)).toBe("Records every 5 s")
+    expect(formatInterval(30)).toBe("Records every 30 s")
   })
 
   it("promotes whole minutes so 300 does not have to be divided in the head", () => {
-    expect(formatInterval(60)).toBe("Every 1 min")
-    expect(formatInterval(300)).toBe("Every 5 min")
+    expect(formatInterval(60)).toBe("Records every 1 min")
+    expect(formatInterval(300)).toBe("Records every 5 min")
   })
 
   it("promotes whole hours", () => {
-    expect(formatInterval(3600)).toBe("Every 1 h")
-    expect(formatInterval(7200)).toBe("Every 2 h")
+    expect(formatInterval(3600)).toBe("Records every 1 h")
+    expect(formatInterval(7200)).toBe("Records every 2 h")
   })
 
   it("falls back to seconds when neither unit divides evenly, so nothing is rounded away", () => {
-    expect(formatInterval(90)).toBe("Every 90 s")
-    expect(formatInterval(5400)).toBe("Every 90 min")
+    expect(formatInterval(90)).toBe("Records every 90 s")
+    expect(formatInterval(5400)).toBe("Records every 90 min")
   })
 })
 
-describe("intervalText", () => {
+describe("intervalLines", () => {
   it.each([
-    [5, 900, "Every 5 s · Sync 15 min"],
-    [30, 300, "Every 30 s · Sync 5 min"],
-    [5, 90, "Every 5 s · Sync 90 s"],
-    [3600, 7200, "Every 1 h · Sync 2 h"]
-  ])("pairs the fix cadence %i s with the sync cadence %i s in the same units", (interval, sync, expected) => {
-    expect(intervalText(interval, sync)).toBe(expected)
+    [5, 900, "Records every 5 s", "Syncs every 15 min"],
+    [30, 300, "Records every 30 s", "Syncs every 5 min"],
+    [5, 90, "Records every 5 s", "Syncs every 90 s"],
+    [3600, 7200, "Records every 1 h", "Syncs every 2 h"]
+  ])("leads with the fix cadence %i s and puts the sync cadence %i s under it", (interval, sync, label, caption) => {
+    expect(intervalLines(interval, sync, false)).toEqual({ label, caption })
   })
 
   it("calls a zero sync interval instant, since every fix is sent as it lands", () => {
-    expect(intervalText(5, 0)).toBe("Every 5 s · Instant sync")
+    expect(intervalLines(5, 0, false)).toEqual({ label: "Records every 5 s", caption: "Syncs each fix" })
+  })
+
+  it("says offline mode instead of a sync cadence, because nothing is sent while it is on", () => {
+    expect(intervalLines(30, 300, true)).toEqual({ label: "Records every 30 s", caption: "Offline mode" })
   })
 })
 

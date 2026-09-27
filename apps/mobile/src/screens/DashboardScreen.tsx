@@ -17,7 +17,7 @@ import { showConfirm } from "../services/modalService"
 import { Button, Container, DashboardBanner, DashboardDock, DashboardMap } from "../components"
 import type { LastKnownLocation } from "../components/features/dashboard/DashboardMap"
 import { TrackToggleButton } from "../components/features/map/TrackToggleButton"
-import { intervalText, pickBannerCondition } from "../utils/dashboardState"
+import { intervalLines, pickBannerCondition } from "../utils/dashboardState"
 import { size, space } from "../constants"
 import { Square, Play } from "lucide-react-native"
 import { logger } from "../utils/logger"
@@ -226,8 +226,8 @@ export function DashboardScreen({ navigation }: ScreenProps) {
   const hasFix = tracking && coords !== null && coords.latitude !== 0 && coords.longitude !== 0
   const dockCoords = hasFix ? { accuracy: coords.accuracy ?? 0, timestamp: coords.timestamp ?? 0 } : null
   const intervalRow = activeProfile
-    ? intervalText(activeProfile.interval, activeProfile.syncInterval)
-    : intervalText(settings.interval, settings.syncInterval)
+    ? intervalLines(activeProfile.interval, activeProfile.syncInterval, settings.isOfflineMode)
+    : intervalLines(settings.interval, settings.syncInterval, settings.isOfflineMode)
 
   return (
     <Container>
@@ -290,7 +290,7 @@ export function DashboardScreen({ navigation }: ScreenProps) {
           coords={dockCoords}
           lastKnown={lastKnown ?? null}
           stoppedByBattery={stoppedByBattery}
-          intervalText={intervalRow}
+          interval={intervalRow}
           endpoint={settings.endpoint}
           isOfflineMode={settings.isOfflineMode}
           navigation={navigation}
