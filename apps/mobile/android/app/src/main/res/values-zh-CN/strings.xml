@@ -16,13 +16,13 @@
     <string name="channel_battery_recovery">电量恢复</string>
     <string name="channel_battery_recovery_description">电量过低导致停止后恢复跟踪</string>
 
-    <string name="status_location_off">位置服务已关闭</string>
+    <string name="status_location_off">定位服务已关闭</string>
     <string name="status_paused">已暂停</string>
     <string name="status_searching">正在搜索 GPS</string>
     <string name="status_tracking">跟踪中</string>
     <string name="status_not_recording">未记录</string>
     <string name="status_stationary">静止</string>
-    <string name="status_pause_wifi">区域 WiFi · 离开后恢复</string>
+    <string name="status_pause_wifi">区域 Wi-Fi · 离开后恢复</string>
     <string name="status_pause_motionless">没有移动 · 移动后恢复</string>
     <string name="status_pause_zone">位于区域内 · 离开后恢复</string>
     <string name="status_offline">离线模式</string>
@@ -68,12 +68,12 @@
         <item quantity="other">已将 %1$d 个位置导出到 %2$s</item>
     </plurals>
     <string name="auto_export_failed">自动导出失败</string>
-    <string name="auto_export_permission_lost">目录权限已丢失。请重新选择导出目录。</string>
+    <string name="auto_export_permission_lost">目录权限已丢失，请重新选择导出目录。</string>
     <string name="auto_export_invalid_config">导出配置无效：%s</string>
     <string name="auto_export_directory_failed">无法访问导出目录：%s</string>
-    <string name="auto_export_read_failed">无法读取位置。将重试。</string>
-    <string name="auto_export_save_failed">无法保存导出文件。将重试。</string>
-    <string name="auto_export_gave_up">多次尝试后导出仍失败。请检查设置。</string>
+    <string name="auto_export_read_failed">无法读取位置，将重试。</string>
+    <string name="auto_export_save_failed">无法保存导出文件，将重试。</string>
+    <string name="auto_export_gave_up">多次尝试后导出仍失败，请检查设置。</string>
 
     <string name="backup_title">Colota 备份</string>
     <string name="backup_working">处理中...</string>
@@ -81,5 +81,5 @@
     <string name="backup_restoring">正在恢复备份...</string>
 
     <string name="battery_recovery_title">正在恢复跟踪</string>
-    <string name="battery_recovery_text">充电器已连接 - 正在重新启动位置跟踪</string>
+    <string name="battery_recovery_text">电源已连接 - 正在重新启动位置跟踪</string>
 </resources>
